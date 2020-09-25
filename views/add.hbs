@@ -3,17 +3,19 @@
 
 <form action="/add" method="POST">
     <div class="input-field">
-          <input id="title" type="text" class="validate">
+          <input id="title" type="text" name="name" class="validate" required>
           <label for="title">Назва</label>
-          <span class="helper-text" data-error="Назвіть предмет" data-success="right">Helper text</span>
+          <span class="helper-text" data-error="Назвіть предмет"></span>
     </div>
     <div class="input-field">
-          <input id="price" type="text" class="validate">
+          <input id="price" type="text" name="price" class="validate" required>
           <label for="price">Ціна</label>
+          <span class="helper-text" data-error="Введіть ціну"></span>
     </div>
     <div class="input-field">
-          <input id="img" type="text" class="validate">
+          <input id="img" type="text" name="url" class="validate" required   >
           <label for="img">URL img</label>
+          <span class="helper-text" data-error="Введіть url"></span>
     </div>
     <button type="submit" class="btn btn-s">Додати товар</button>
 </form>

@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 const router = Router();
-router.get('/contact', (req, res) => {
+router.get('/', (req, res) => {
     res.status(200);
     res.render('contact', {
         title: "contact",
