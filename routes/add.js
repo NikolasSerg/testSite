@@ -1,6 +1,6 @@
 const { Router } = require('express');
-
 const router = Router();
+const Product = require('../models/product');
 
 router.get('/', (req, res) => {
     res.status(200);
@@ -10,8 +10,11 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log(req.body);
+    console.log(req.body, ' -req.body');
     // res.end('posts did his job')
+    const product = new Product(req.body.title, req.body.price, req.body.img);
+    product.save();
+
     res.redirect('/posts');
 });
 
