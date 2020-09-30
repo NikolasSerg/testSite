@@ -1,4 +1,4 @@
-// const uuid = require('uuid/dist/v4');
+const uuid = require('uuid/dist/v4');
 const path = require('path');
 const fs = require('fs');
 const { resolve } = require('path');
@@ -20,13 +20,7 @@ class Product {
     }
     async save() {
         let data = await Product.getAll();
-
-        console.log(data, ' - data');
-        console.log(typeof data, ' - type of data');
-        console.log(this.dataToJson(), ' - this.dataToJson() in save');
         data.push(this.dataToJson());
-        console.log(data, ' - data');
-        console.log(typeof data, ' - type of data');
         // return new Promise((resolve, reject) => {
         fs.writeFile(
                 path.join(__dirname, '..', 'data', 'data.json'),
@@ -35,7 +29,6 @@ class Product {
                     if (err) {
                         console.log(err);
                     } else {
-                        console.log(JSON.stringify(data));
                         console.log('write file success');
                     }
                 }
@@ -51,7 +44,6 @@ class Product {
                     if (err) {
                         reject(err)
                     } else {
-                        console.log(JSON.parse(content), ' - JSON.parse(content) getAll');
                         resolve(JSON.parse(content))
                     }
                 }
