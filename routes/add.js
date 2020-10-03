@@ -9,13 +9,13 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     console.log(req.body, ' -req.body');
     // res.end('posts did his job')
     const product = new Product(req.body.title, req.body.price, req.body.img);
-    product.save();
+    await product.save();
 
-    res.redirect('/posts');
+    res.redirect("/posts");
 });
 
 module.exports = router;

@@ -1,39 +1,40 @@
-const uuid = require('uuid/dist/v4');
+const uuid4 = require('uuid4');
 const path = require('path');
 const fs = require('fs');
-const { resolve } = require('path');
 
 class Product {
     constructor(title, price, img) {
         this.title = title,
             this.price = price,
             this.img = img
-            // this.uuid = uuid()
+            this.id = uuid4()
     }
     dataToJson() {
         return {
             title: this.title,
             price: this.price,
             img: this.img,
-            // id: this.id
+            id: this.id
         }
     }
     async save() {
         let data = await Product.getAll();
         data.push(this.dataToJson());
-        // return new Promise((resolve, reject) => {
-        fs.writeFile(
-                path.join(__dirname, '..', 'data', 'data.json'),
-                JSON.stringify(data),
-                (err) => {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log('write file success');
+        return new Promise((resolve, reject) => {
+            fs.writeFile(
+                    path.join(__dirname, '..', 'data', 'data.json'),
+                    JSON.stringify(data),
+                    (err) => {
+                        if (err) {
+                            console.log(err);
+                            reject(err);
+                        } else {
+                            console.log('write file success');
+                            resolve();
+                        }
                     }
-                }
-            )
-            // })
+                )
+        })
     }
     static getAll() {
         return new Promise((resolve, reject) => {
@@ -44,6 +45,7 @@ class Product {
                     if (err) {
                         reject(err)
                     } else {
+                        console.log('getAll done');
                         resolve(JSON.parse(content))
                     }
                 }
