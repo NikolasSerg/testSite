@@ -10,6 +10,12 @@ class Product {
             this.id = uuid4()
     }
     dataToJson() {
+        console.log({
+            title: this.title,
+            price: this.price,
+            img: this.img,
+            id: this.id
+        }, "obj in dataToJSON");
         return {
             title: this.title,
             price: this.price,
@@ -20,22 +26,22 @@ class Product {
     async save() {
         let data = await Product.getAll();
         data.push(this.dataToJson());
-        return new Promise((resolve, reject) => {
+        // return new Promise((resolve, reject) => {
             fs.writeFile(
                     path.join(__dirname, '..', 'data', 'data.json'),
                     JSON.stringify(data),
                     (err) => {
                         if (err) {
                             console.log(err);
-                            reject(err);
+                            // reject(err);
                         } else {
                             console.log('write file success');
-                            resolve();
+                            // resolve(data);
                         }
                     }
                 )
-        })
-    }
+        // })
+    } 
     static getAll() {
         return new Promise((resolve, reject) => {
             fs.readFile(

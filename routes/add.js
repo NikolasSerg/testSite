@@ -11,11 +11,9 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
     console.log(req.body, ' -req.body');
-    // res.end('posts did his job')
     const product = new Product(req.body.title, req.body.price, req.body.img);
     await product.save();
-
-    res.redirect("/posts");
+    res.redirect('/posts');
 });
 
 module.exports = router;
