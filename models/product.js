@@ -7,7 +7,7 @@ class Product {
         this.title = title,
             this.price = price,
             this.img = img
-            this.id = uuid4()
+        this.id = uuid4()
     }
     dataToJson() {
         console.log({
@@ -28,20 +28,20 @@ class Product {
         data.push(this.dataToJson());
         return new Promise((resolve, reject) => {
             fs.writeFile(
-                    path.join(__dirname, '..', 'data', 'data.json'),
-                    JSON.stringify(data),
-                    (err) => {
-                        if (err) {
-                            console.log(err);
-                            reject(err);
-                        } else {
-                            console.log('write file success');
-                            resolve(data);
-                        }
+                path.join(__dirname, '..', 'data', 'data.json'),
+                JSON.stringify(data),
+                (err) => {
+                    if (err) {
+                        console.log(err);
+                        reject(err);
+                    } else {
+                        console.log('write file success');
+                        resolve(data);
                     }
-                )
+                }
+            )
         })
-    } 
+    }
     static getAll() {
         return new Promise((resolve, reject) => {
             fs.readFile(
@@ -57,6 +57,17 @@ class Product {
                 }
             )
         })
+    }
+    static async getId(id) {
+        console.log(id, ' - id in PRODUCT');
+        let data = await Product.getAll();
+        console.log(data, ' - data in PRODUCT ')
+        console.log(typeof data, ' - type data in PRODUCT');
+        let idProduct = data.find(iterator => iterator.id === id);
+
+        console.log(idProduct, ' - idProd in PRODUCT');
+        // return idProduct;
+        return data.find(iterator => iterator.id === id);
     }
 }
 

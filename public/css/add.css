@@ -1,0 +1,8 @@
+.insertDiv {
+    display: flex;
+}
+
+.insertDiv ul {
+    flex-grow: 1;
+    margin: 0 0 3rem 2rem;
+}
