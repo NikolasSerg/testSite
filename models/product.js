@@ -26,21 +26,21 @@ class Product {
     async save() {
         let data = await Product.getAll();
         data.push(this.dataToJson());
-        // return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             fs.writeFile(
                     path.join(__dirname, '..', 'data', 'data.json'),
                     JSON.stringify(data),
                     (err) => {
                         if (err) {
                             console.log(err);
-                            // reject(err);
+                            reject(err);
                         } else {
                             console.log('write file success');
-                            // resolve(data);
+                            resolve(data);
                         }
                     }
                 )
-        // })
+        })
     } 
     static getAll() {
         return new Promise((resolve, reject) => {
