@@ -1,10 +1,10 @@
 const { Router } = require('express');
-const Product = require('../models/product');
+const Product = require('../models/goods');
 
 const router = Router();
 
 router.get('/', async(req, res) => {
-    let product = await Product.getAll();
+    let product = await Product.getAll('dataGoods');
     res.status(200);
     res.render('posts', {
         title: 'posts',

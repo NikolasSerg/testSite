@@ -6,7 +6,8 @@ const routersAbout = require('./routes/about');
 const routersContact = require('./routes/contact');
 const routersGallery = require('./routes/gallery');
 const routersPrices = require('./routes/prices');
-const routersAdd = require('./routes/add');
+const routersAddGoods = require('./routes/addGoods');
+const routersAddPosts = require('./routes/addPosts');
 const routersPosts = require('./routes/posts');
 
 const hbs = exphbs.create({
@@ -14,7 +15,7 @@ const hbs = exphbs.create({
     extname: 'hbs'
 })
 
-
+ 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
@@ -27,7 +28,8 @@ app.use('/about', routersAbout);
 app.use('/contact', routersContact);
 app.use('/gallery', routersGallery);
 app.use('/prices', routersPrices);
-app.use('/add', routersAdd);
+app.use('/addgoods', routersAddGoods);
+app.use('/addposts', routersAddPosts);
 app.use('/posts', routersPosts);
 
 const PORT = process.env.PORT || 3000;
