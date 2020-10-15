@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const Product = require('../models/goods');
+const product = require('../models/goods');
 
 router.get('/', (req, res) => {
     res.status(200);
@@ -33,7 +33,8 @@ router.post('/', async (req, res) => {
         return rezall;
     }
     splitReqBody(req.body);
-    const product = new Product(req.body.title, req.body.price, req.body.img);
+    // const product = new Product(req.body.title, req.body.price, req.body.img);
+    const product = product(req.body);
     await product.save('dataGoods');
     res.redirect('/posts');
 });
