@@ -1,19 +1,19 @@
-<h1>ADD page</h1>
+<h1>EDIT page</h1>
 <a href="http:/">ГОЛОВНА</a>
 
 <form action="/add" method="POST">
     <div class="input-field">
-          <input id="title" type="text" name="title" class="validate" required>
+          <input id="title" type="text" name="title" class="validate" value="{{product.title}}">
           <label for="title">ЗАГОЛОВОК H1</label>
           <span class="helper-text" data-error="Назвіть предмет"></span>
     </div>
     <div class="input-field">
-          <input id="price" type="text" name="price" class="validate" required>
+          <input id="price" type="text" name="price" class="validate" value="{{product.price}}">
           <label for="price">Ціна</label>
           <span class="helper-text" data-error="Введіть ціну"></span>
     </div>
     <div class="input-field">
-          <input id="img" type="text" name="img" class="validate" required   >
+          <input id="img" type="text" name="img" class="validate" required  value="{{product.img}}">
           <label for="img">URL img</label>
           <span class="helper-text" data-error="Введіть url"></span>
     </div>
@@ -29,4 +29,4 @@
                   <li class="collection-item">ПАРАГРАФ "P"</li>
                   <li class="collection-item">КАРТИНКА "IMG"</li>
             </ul>
-    </div> --}}
+    </div> --}}  

@@ -24,5 +24,12 @@ router.get('/:id', async(req, res) => {
     });
 })
 
+router.get('/:id/edit', async (req, res) => {
+    if(!req.query.allow) {
+        return res.redirect("/");
+    }
+    let product = await Product.getId(req.params.id);
+    res.render('post-edit', {product});
+})
 
 module.exports = router;
