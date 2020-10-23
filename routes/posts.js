@@ -21,7 +21,7 @@ router.get('/:id', async(req, res) => {
     res.render('post', {
         title: product.title,
         product: product
-    });
+    });isPrimeisPrimeisPrime
 })
 
 router.get('/:id/edit', async (req, res) => {
@@ -32,4 +32,15 @@ router.get('/:id/edit', async (req, res) => {
     res.render('post-edit', {product});
 })
 
-module.exports = router;
+router.post('/edit', async (req, res) => {
+//    console.log(req.body, ' -  req.body');
+    await Product.update(req.body);
+    res.redirect("/posts");
+
+  
+//    let indexData = data.findIndex();
+//    console.log(indexData, ' - indexData');
+//    console.log(data[indexData], ' - data[indexData]');
+})
+
+module.exports = router; 

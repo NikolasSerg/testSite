@@ -1,7 +1,7 @@
 <h1>EDIT page</h1>
 <a href="http:/">ГОЛОВНА</a>
 
-<form action="/add" method="POST">
+<form action="/posts/edit" method="POST">
     <div class="input-field">
           <input id="title" type="text" name="title" class="validate" value="{{product.title}}">
           <label for="title">ЗАГОЛОВОК H1</label>
@@ -17,6 +17,9 @@
           <label for="img">URL img</label>
           <span class="helper-text" data-error="Введіть url"></span>
     </div>
+
+    <input type="hidden" name="id" value="{{product.id}}">
+
     <button class="btn btn-primary" type="submit">Додати товар</button>
 </form>
 

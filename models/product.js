@@ -59,15 +59,38 @@ class Product {
         })
     }
     static async getId(id) {
-        console.log(id, ' - id in PRODUCT');
+        // console.log(id, ' - id in PRODUCT');
         let data = await Product.getAll();
-        console.log(data, ' - data in PRODUCT ')
-        console.log(typeof data, ' - type data in PRODUCT');
-        let idProduct = data.find(iterator => iterator.id === id);
-
-        console.log(idProduct, ' - idProd in PRODUCT');
+        // console.log(data, ' - data in PRODUCT ')
+        // // console.log(typeof data, ' - type data in PRODUCT');
+        // let idProduct = data.find(iterator => iterator.id === id);
+        // console.log(idProduct, ' - idProd in PRODUCT');
         // return idProduct;
         return data.find(iterator => iterator.id === id);
+    }
+    static async update(arg) {
+        console.log(arg, ' - arg ');
+        let data = await Product.getAll();
+        console.log(typeof data);
+        
+        console.log(data, ' - data');
+        let indexData = data.findIndex(item => item.id === arg.id);
+        console.log(indexData, ' - indexData');
+        data[indexData] = arg;
+
+        fs.writeFile(
+            path.join(__dirname, '..', 'data', 'data.json'),
+            JSON.stringify(data),
+            (err) => {
+                if (err) {
+                    console.log(err);
+                    reject(err);
+                } else {
+                    console.log('write file success');
+                    resolve(data);
+                }
+            }
+        )
     }
 }
 
