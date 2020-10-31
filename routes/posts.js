@@ -21,7 +21,7 @@ router.get('/:id', async(req, res) => {
     res.render('post', {
         title: product.title,
         product: product
-    });isPrimeisPrimeisPrime
+    });
 })
 
 router.get('/:id/edit', async (req, res) => {
@@ -33,7 +33,7 @@ router.get('/:id/edit', async (req, res) => {
 })
 
 router.post('/edit', async (req, res) => {
-//    console.log(req.body, ' -  req.body');
+   console.log(req.body, ' -  req.body');
     await Product.update(req.body);
     res.redirect("/posts");
 

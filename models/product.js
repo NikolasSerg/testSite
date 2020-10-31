@@ -5,8 +5,8 @@ const fs = require('fs');
 class Product {
     constructor(title, price, img) {
         this.title = title,
-            this.price = price,
-            this.img = img
+        this.price = price,
+        this.img = img
         this.id = uuid4()
     }
     dataToJson() {
@@ -23,11 +23,31 @@ class Product {
             id: this.id
         }
     }
+
+    // saveMethod() {
+    //     return  new Promise((resolve, reject) => {
+    //         return fs.writeFile(
+    //             path.join(__dirname, '..', 'data', 'data.json'),
+    //             JSON.stringify(data),
+    //             (err) => {
+    //                 if (err) {
+    //                     console.log(err);
+    //                     reject(err);
+    //                 } else {
+    //                     console.log('write file success');
+    //                     resolve(data);
+    //                 }
+    //             }
+    //         )
+    //     })
+    // }
+
     async save() {
         let data = await Product.getAll();
         data.push(this.dataToJson());
+        // return  await Product.saveMethod();
         return new Promise((resolve, reject) => {
-            fs.writeFile(
+            return fs.writeFile(
                 path.join(__dirname, '..', 'data', 'data.json'),
                 JSON.stringify(data),
                 (err) => {
@@ -40,8 +60,11 @@ class Product {
                     }
                 }
             )
-        })
+        }
+        )
     }
+    
+    
     static getAll() {
         return new Promise((resolve, reject) => {
             fs.readFile(

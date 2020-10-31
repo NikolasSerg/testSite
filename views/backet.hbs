@@ -1,0 +1,16 @@
+<h1>BACKET</h1>
+
+{{#if data.length}}
+{{#each data}}
+<ul class="collection">
+    <li class="collection-item-avatar">
+        <img src="{{img}}" alt="{{title}}">
+        <span class="title">{{title}}</span>
+          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+</ul>
+{{/each}}
+
+{{else}}
+    <p>nope</p>
+{{/if}}

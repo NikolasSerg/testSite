@@ -1,43 +1,64 @@
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        {{#if isHome}}
-          <li class="active"><a href="/">ГОЛОВНА</a></li>
-        {{else}}
-          <li><a href="/">ГОЛОВНА</a></li>
-        {{/if}}
-        
-        {{#if isGallery}}
-          <li class="active"><a href="/gallery">ГАЛЕРЕЯ</a></li>
-        {{else}}
-          <li><a href="/gallery">ГАЛЕРЕЯ</a></li>
-        {{/if}}
-        
-        {{#if isPrices}}
-          <li class="active"><a href="/prices">ПРАЙС</a></li>
-        {{else}}
-          <li><a href="/prices">ПРАЙС</a></li>
-        {{/if}}
+<nav>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Logo</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      {{#if isHome}}
+      <li class="active"><a href="/">ГОЛОВНА</a></li>
+      {{else}}
+      <li><a href="/">ГОЛОВНА</a></li>
+      {{/if}}
 
-        {{#if isPosts}}
-          <li class="active"><a href="/posts">ПОСТИ</a></li>
-        {{else}}
-          <li><a href="/posts">ПОСТИ</a></li>
-        {{/if}}
-        
-        {{#if isContact}}
-          <li class="active"><a href="/contact">КОНТАКТИ</a></li>
-        {{else}}
-          <li><a href="/contact">КОНТАКТИ</a></li>
-        {{/if}}
+      {{#if isGallery}}
+      <li class="active"><a href="/gallery">ГАЛЕРЕЯ</a></li>
+      {{else}}
+      <li><a href="/gallery">ГАЛЕРЕЯ</a></li>
+      {{/if}}
 
-        {{#if isAbout}}
-          <li class="active"><a href="/about">ПРО НАС</a></li>
-        {{else}}
-          <li><a href="/about">ПРО НАС</a></li>
-        {{/if}}
+      {{#if isPrices}}
+      <li class="active"><a href="/prices">ПРАЙС</a></li>
+      {{else}}
+      <li><a href="/prices">ПРАЙС</a></li>
+      {{/if}}
 
-      </ul>
-    </div>
-  </nav>
+      {{#if isPosts}}
+      <li class="active"><a href="/posts">ПОСТИ</a></li>
+      {{else}}
+      <li><a href="/posts">ПОСТИ</a></li>
+      {{/if}}
+
+      {{#if isContact}}
+      <li class="active"><a href="/contact">КОНТАКТИ</a></li>
+      {{else}}
+      <li><a href="/contact">КОНТАКТИ</a></li>
+      {{/if}}
+
+      {{#if isAbout}}
+      <li class="active"><a href="/about">ПРО НАС</a></li>
+      {{else}}
+      <li><a href="/about">ПРО НАС</a></li>
+      {{/if}}
+
+      {{#if isBasket}}
+      {{!-- <div> --}}
+        <li class="active">
+          <a href="/backet"><i class="large material-icons">shopping_cart</i></a>
+        </li>
+
+
+      {{!-- </div> --}}
+      {{else}}
+      {{!-- <div> --}}
+        {{!-- <li class="navbar_backet"> --}}
+        <li class="navbar_backet">
+          <a href="/backet"><i class="large material-icons">shopping_cart</i></a>
+          <div class="navbar_hiden">
+            
+          </div>
+        </li>
+
+      {{!-- </div> --}}
+      {{/if}}
+
+    </ul>
+  </div>
+</nav>

@@ -8,6 +8,7 @@ const routersGallery = require('./routes/gallery');
 const routersPrices = require('./routes/prices');
 const routersAdd = require('./routes/add');
 const routersPosts = require('./routes/posts');
+const routersBacket = require('./routes/backet');
 
 const hbs = exphbs.create({
     defaultLayout: 'main',
@@ -29,6 +30,7 @@ app.use('/gallery', routersGallery);
 app.use('/prices', routersPrices);
 app.use('/add', routersAdd);
 app.use('/posts', routersPosts);
+app.use('/backet', routersBacket);
 
 const PORT = process.env.PORT || 3000;
 

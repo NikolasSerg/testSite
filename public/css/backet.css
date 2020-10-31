@@ -1,0 +1,7 @@
+.navbar_hiden {
+    display: none;
+    position: absolute;
+    width: 200px;
+    height: 400px;
+    background-color: red;
+}
