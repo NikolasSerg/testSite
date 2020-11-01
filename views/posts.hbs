@@ -22,11 +22,11 @@
         <div>
           <a href="/posts/{{id}}" target="_blank">РЕЦЕПТ</a>
           <a href="/posts/{{id}}/edit?allow=true">РЕДАКТУВАТИ</a>
-          <form action="/backet" method="POST">
+          <form action="#">
             <input type="hidden" name="id" value="{{id}}">
             <input type="hidden" name="img" value="{{img}}">
             <input type="hidden" name="title" value="{{title}}">
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" onclick="fetchToServer(event)">
               <i class="small material-icons">shopping_cart</i>
             </button>
           </form>

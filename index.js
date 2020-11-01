@@ -10,6 +10,8 @@ const routersAdd = require('./routes/add');
 const routersPosts = require('./routes/posts');
 const routersBacket = require('./routes/backet');
 
+const bodyParser = require("body-parser");
+
 const hbs = exphbs.create({
     defaultLayout: 'main',
     extname: 'hbs'
@@ -22,6 +24,8 @@ app.set('views', 'views');
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended:false}))
+
+app.use(bodyParser.json());
 
 app.use('/', routersHome);
 app.use('/about', routersAbout);

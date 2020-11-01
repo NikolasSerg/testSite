@@ -1,14 +1,1 @@
-[
-  {
-    "id": "a8dedf72-8ca3-4b73-97f7-0dd9acb28ae3",
-    "img": "/img/backet/drunkCherry.jpg",
-    "title": "Торт Хмільна вишня",
-    "count": 2
-  },
-  {
-    "id": "5",
-    "img": "/img/backet/marzipan.jpg",
-    "title": "ТОРТ з марцепаном",
-    "count": 5
-  }
-]
+[{"id":"5","img":"/img/backet/marzipan.jpg","title":"ТОРТ з марцепаном","count":8},{"id":"a8dedf72-8ca3-4b73-97f7-0dd9acb28ae3","img":"/img/backet/drunkCherry.jpg","title":"Торт Хмільна вишня","count":1}]

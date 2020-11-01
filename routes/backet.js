@@ -11,21 +11,24 @@ colors.setTheme({
   error: 'red'
 });
 
+
+
 router.post('/', async (req, res) => {
-    console.log(req.body, ' - req.body in backet');
+    console.log(req.body, ' - req.body in backet'.red.bgBlue);
+    console.log(typeof req.body, ' - typeof req.body');
    
     let backetId = await backet.getId(req.body.id);
-    console.log(backetId, ' - backetId'.bgGreen.error);
-    console.log(backetId.length, '- backetId.length');
+    // console.log(backetId, ' - backetId'.bgGreen.error);
+    // console.log(backetId.length, '- backetId.length');
 
     if(backetId.length == 0) {
-        console.log(backetId.length, ' - backetId.length');
+        // console.log(backetId.length, ' - backetId.length');
         let newSave = req.body;
-        console.log(newSave,  ' - newSave');
+        // console.log(newSave,  ' - newSave');
         newSave.count = 1;
         let url = newSave.img;
-        console.log(url, ' - url');
-        console.log(typeof url, ' - typeof url');
+        // console.log(url, ' - url');
+        // console.log(typeof url, ' - typeof url');
 
         let urlSlice = url.slice(5);
         let urlNew = "/img/"+"backet/"+urlSlice;
@@ -36,7 +39,8 @@ router.post('/', async (req, res) => {
         backet.save(backetId[0], ' - backetId');
     }
 
-    res.redirect('/posts');
+    // // res.redirect('/posts');
+    res.send('{"all": "ok"}');
 });
 
 router.get('/', async (req, res) => {
