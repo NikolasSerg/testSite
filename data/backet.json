@@ -1,1 +1,10 @@
-""
+[
+  {
+    "title": "ТОРТ з марцепаном",
+    "price": 125,
+    "img": "/img/backet/marzipan.jpg",
+    "id": "7bd2f92e-1a42-43b0-bd13-dbed0487ea7f",
+    "count": 1,
+    "sum": 125
+  }
+]

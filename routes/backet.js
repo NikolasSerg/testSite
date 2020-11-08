@@ -21,15 +21,16 @@ router.post('/', async (req, res) => {
     let backetId = await backet.getId(req.body.id);
 
     console.log(backetId, ' - backetId'.bgGreen.error);
+
     // console.log(backetId.length, '- backetId.length');
 
     let product = await Product.getId(req.body.id);
 
-    console.log(product,' - product'.blue);
+    console.log(product,' - product'.bgGreen.error);
 
-    if(backetId === "") {
+    if(backetId.length === 0) {
         
-        console.log(product, ' - product in backet router'.green.bgYellow);
+        // console.log(product, ' - product in backet router'.green.bgYellow);
         // console.log(backetId.length, ' - backetId.length');
         // let newSave = req.body;
         // console.log(newSave,  ' - newSave');
@@ -44,17 +45,20 @@ router.post('/', async (req, res) => {
         let urlNew = "/img/"+"backet/"+urlSlice;
         product.img = urlNew;
         backet.save(product);
-        console.log(product, ' - product send ti save'.blue);
+        console.log(product, ' - product send ti save'.bgGreen.error);
     } else {
-        product.count += 1;
-        product.sum = product.price * product.count;
+        console.log("ELSE ROUTER DONE-----------------------------------------------");
+        backetId.count += 1;
+        console.log(backetId.count, ' /////////////////////// backetId.count');
+        backetId.sum = backetId.price * backetId.count;
+        console.log(backetId.sum,' /////////////////////////- backetId.sum');
 
-        console.log(product.sum, ' - product.sum in backet router');
+        console.log(backetId.sum, ' - product.sum in backet router'.bgGreen.error);
 
         // backetId[0].count += 1;
         // backetId[0].sum = backetId.price * backetId
-        backet.save(product);
-        console.log(product, ' - product send to save else'.blue);
+        backet.save(backetId);
+        console.log(backetId, ' - product send to save else'.bgGreen.error);
     }
 
     // // res.redirect('/posts');
@@ -62,13 +66,13 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-    console.log('__________________________________________________________________________-');
+    // console.log('__________________________________________________________________________-');
     let data = await backet.getAll();
     let sum = await backet.getSum(data);
-    console.log(sum, ' - sum');
-    console.log(typeof data, ' - typeof data');
-    console.log(data.length, ' - data.length');
-    console.log(data, ' - backet');
+    // console.log(sum, ' - sum');
+    // console.log(typeof data, ' - typeof data');
+    // console.log(data.length, ' - data.length');
+    // console.log(data, ' - backet');
     res.render('backet', {
         data
     });
