@@ -1,14 +1,14 @@
 [
   {
     "title": "ТОРТ з марцепаном",
-    "price": "125",
+    "price": 125,
     "img": "/img/marzipan.jpg",
-    "id": "5"
+    "id": "7bd2f92e-1a42-43b0-bd13-dbed0487ea7f"
   },
   {
     "title": "Торт Хмільна вишня",
-    "price": "255",
+    "price": 185,
     "img": "/img/drunkCherry.jpg",
-    "id": "a8dedf72-8ca3-4b73-97f7-0dd9acb28ae3"
+    "id": "5ba45808-f9dd-47af-9c72-d6a5bf51f7d6"
   }
 ]

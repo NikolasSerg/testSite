@@ -5,7 +5,7 @@ const fs = require('fs');
 class Product {
     constructor(title, price, img) {
         this.title = title,
-        this.price = price,
+        this.price = +price,
         this.img = img
         this.id = uuid4()
     }
@@ -74,7 +74,7 @@ class Product {
                     if (err) {
                         reject(err)
                     } else {
-                        console.log('getAll done');
+                        // console.log('getAll done');
                         resolve(JSON.parse(content))
                     }
                 }

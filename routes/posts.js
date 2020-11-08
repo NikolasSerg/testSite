@@ -11,13 +11,13 @@ router.get('/', async(req, res) => {
         isPosts: true,
         product
     });
-    console.log('posts is it');
+    // console.log('posts is it');
 });
 
 router.get('/:id', async(req, res) => {
-    console.log(req.params.id, ' - req.params.id');
+    // console.log(req.params.id, ' - req.params.id');
     let product = await Product.getId(req.params.id);
-    console.log(product, ' - product');
+    // console.log(product, ' - product');
     res.render('post', {
         title: product.title,
         product: product
@@ -33,7 +33,7 @@ router.get('/:id/edit', async (req, res) => {
 })
 
 router.post('/edit', async (req, res) => {
-   console.log(req.body, ' -  req.body');
+//    console.log(req.body, ' -  req.body');
     await Product.update(req.body);
     res.redirect("/posts");
 

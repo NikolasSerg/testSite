@@ -1,16 +1,22 @@
 <h1>BACKET</h1>
 
-{{#if data.length}}
-{{#each data}}
-<ul class="collection">
-    <li class="collection-item-avatar">
-        <img src="{{img}}" alt="{{title}}">
-        <span class="title">{{title}}</span>
-          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-</ul>
-{{/each}}
 
+{{#if data.length}}
+  
+{{#each data}}
+    <div class="backet_wrapper">
+        <div>
+            <img src={{img}} alt={{title}}>
+            <div>{{title}}</div>
+            <div>{{price}}</div>
+            <div>{{count}}</div>
+            <div>{{sum}}</div>
+        </div>
+   </div>         
+            
+
+{{/each}}
+    
 {{else}}
     <p>nope</p>
 {{/if}}

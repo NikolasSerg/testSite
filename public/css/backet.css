@@ -1,7 +1,15 @@
-.navbar_hiden {
-    display: none;
-    position: absolute;
-    width: 200px;
-    height: 400px;
-    background-color: red;
+.backet_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    width: 100%;
 }
+
+.backet_wrapper > div {
+    border: 2px solid red;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+} 
