@@ -33,9 +33,12 @@ router.post('/', async (req, res) => {
         let urlSlice = url.slice(5);
         let urlNew = "/img/"+"backet/"+urlSlice;
         newSave.img = urlNew;
+        newSave.price = +newSave.price;
+        newSave.sum = +newSave.price;
         await backet.save(newSave);
     } else {
         backetId[0].count += 1;
+        backetId[0].sum = backetId[0].price * backetId[0].count;
         backet.save(backetId[0], ' - backetId');
     }
 
@@ -45,14 +48,23 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     let data = await backet.getAll();
+    let sumAll = data.reduce((pre, cur) => 
+        pre.sum + cur.sum
+    );
+    
+    console.log(sumAll, ' - sumAll'.red.bgBlue);
     // console.log(typeof data, ' - typeof data');
     // console.log(data.length, ' - data.length');
-    // console.log(data, ' - backet');
+    console.log(data, ' - backet'.red.bgBlue);
     res.render('backet', {
-        data
+        data,
+        sumAll
     });
-
 })
 
+router.delete('/del/:id', (req, res) => {
+    let data = backet.del(req.params.id);
+    res.status(200).json(data);
+})
 
 module.exports = router;

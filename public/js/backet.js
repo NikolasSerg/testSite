@@ -1,11 +1,32 @@
+// let count;
+// let add;
+// let remove;
+// let sum;
+let sumAll;
+
+window.onload = function() {
+  console.log('сторніка загрузилась');
+  // let count = document.querySelector('#backet .backet_counter');
+  // let add = document.querySelector('#backet .backet_add');
+  // let remove = document.querySelector('#backet .backet_remove');
+  sumAll = document.querySelector('#backet_sumAll');
+
+  // console.log(sum);
+  // // console.log(count, ' - count');
+  // // console.log(count.value, ' - count.value');
+  // console.log(add);
+  // console.log(remove);
+}
+
 function objCompos (event) {
     console.log(event.currentTarget.form[0]);
     console.log(event.currentTarget.form[1]);
     console.log(event.currentTarget.form[2]);
+    console.log(event.currentTarget.form[3]);
     console.log(event.currentTarget.form.length);
 
   let obj = {};
-  for(let i = 0; i < 3; i++)  {
+  for(let i = 0; i < 4; i++)  {
     obj[event.currentTarget.form[i].name] = event.currentTarget.form[i].value; 
   }
   // console.log(obj, ' - obj');
@@ -39,85 +60,99 @@ async function postData(url, data) {
   return await responce.json();
 }
 
+// опрацювання подій в корзині
 
+let backet = document.querySelector('#backet');
+backet.addEventListener('click', (event)  => {
+    // додавання одиниць товару
+    if(event.target.classList.contains('backet_add')) {
+      let add_button =  event.target;
+      // console.log(add_button, ' - add_button');
+      let input = add_button.parentElement.previousElementSibling;
+      // console.log(input, ' - input');
 
-// let backetNavbar  = document.querySelector('.navbar_backet');
-// let backetHiden  = document.querySelector('.navbar_hiden');
+      // console.log('its class add');
+      // console.log(event.target, ' - event.target');
+      // console.log(event.target.attributes.name.value, ' - event.attributes.name.value');
+      // console.log(input.value, ' - input value');
+      input.value = +input.value + 1;
+      
+      let priceItemHtml = parseInt(add_button.parentElement.parentElement.nextElementSibling.textContent);
+      // console.log(priceItemHtml, ' - priceItemHtml');
+      // console.log(priceItemHtml.textContent, ' - priceItemHtml textContent');
+      let sumItemHtml = add_button.parentElement.parentElement.nextElementSibling.nextElementSibling;
+      // console.log(sumItemHtml.textContent,' - sumItemHtml text conent');
+      let sumItem = parseInt(input.value) * priceItemHtml;
+      // let sumItem = +sumItemHtml.textContent + +priceItemHtml.textContent;
+      // let sumItem = parseInt(sumItemHtml.textContent) + parseInt(priceItemHtml.textContent);
+      // console.log(+sumItemHtml.textContent + +priceItemHtml.textContent, ' - test');
+      // console.log(sumItem, ' - sumItem');
+      sumItemHtml.innerHTML = sumItem;
 
+      let sum = parseInt(sumAll.textContent);
+      // console.log(sum, ' - sum');
+      sumAll.innerHTML = sum + priceItemHtml;
 
-// backetNavbar.addEventListener('mouseover', function(){
-//     backetHiden.style.display = 'block';
-//     console.log('ura');
-// })
-// backetNavbar.addEventListener('mouseout', function(){
-//     backetHiden.style.display = 'none';
-//     console.log('bbbra');
-// })
+    }
+    // віднімання товару
+    else if(event.target.classList.contains('backet_remove')) {
+      // console.log('its class remove');
+      let remove_button =  event.target;
+      let input = remove_button.parentElement.nextElementSibling;
+      // console.log(input, ' - input in remove');
+      // console.log(+input.value, ' - input.value in remove');
 
-// function forTest(event) {
-//     let obj = {};
-     
-//     for(let i = 0; i < 3; i++) {
-//         let name = event.currentTarget.form[i].name;
-//         let value = event.currentTarget.form[i].value;
-//         obj[name] = value;
-//     }
-//     return obj;
-// }
+      let rez = parseInt(input.value) - 1;
+      console.log(rez, ' - rez');
 
-// async function testDrive(event) {
-//     console.log(event.currentTarget.form[0]);
-//     console.log(event.currentTarget.form[1]);
-//     console.log(event.currentTarget.form[2]);
-//     console.log(event.currentTarget.form[3]);
-//     console.log(event.currentTarget.form.length);
+      let priceItem = parseInt(remove_button.parentElement.parentElement.nextElementSibling.textContent);
+      let sumItemHtml = remove_button.parentElement.parentElement.nextElementSibling.nextElementSibling;
+      let sumItem;  
+       
+      // console.log(sumItem, " - sumItem");
     
-//     let test = await forTest(event);
 
-//     console.log(test, ' - test');
-//     event.preventDefault();
-//     let test2 = {
-//         test: 'test it is'
-//     }
+      let sum = parseInt(sumAll.textContent);
 
-//     let response = await fetch('/backet',
-//         {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json;charset=utf-8'
-//               },
-//             body: JSON.stringify(test2)
-//         }
-//     )
-//     let result = await response.json();
-//     alert(result.message);
-// }
-
-// // --------------------------------
-// async function postData(url = '', data = {}) {
-//     // Default options are marked with *
-//     const response = await fetch(url, {
-//       method: 'POST', // *GET, POST, PUT, DELETE, etc.
-//       mode: 'cors', // no-cors, *cors, same-origin
-//       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-//       credentials: 'same-origin', // include, *same-origin, omit
-//       headers: {
-//         'Content-Type': 'application/json'
-//         // 'Content-Type': 'application/x-www-form-urlencoded',
-//       },
-//       redirect: 'follow', // manual, *follow, error
-//       referrerPolicy: 'no-referrer', // no-referrer, *client
-//       body: JSON.stringify(data) // body data type must match "Content-Type" header
-//     });
-//     return await response.json(); // parses JSON response into native JavaScript objects
-//   }
-  
-//   postData('/backet', { answer: 42 })
-//     .then((data) => {
-//       console.log(data); // JSON data parsed by `response.json()` call
-//     });
+      if(rez < 1) {
+        input.value = 1;
+        sumItem = priceItem;
+      } else {
+        input.value = rez;
+        sumItem = parseInt(input.value) * priceItem;
+        sumAll.innerHTML = sum - priceItem;
+      }
+      sumItemHtml.innerHTML = sumItem;
+    }
+    else if(event.target.classList.contains('backet_counter')){
+      let close = event.target;
+      let parent = close.parentElement;
+    }
+    else {
+      console.log('none');
+    }
+});
 
 
-// // backetNavbar.onfocus = function() {
-// //     console.log('test');
-// // }
+// let event = new Event("")
+
+backet.addEventListener('input', (event) => {
+  if(event.currentTarget.classList.contains = 'backet_counter') {
+    // console.log('input change');
+    let input = event.target;
+    let priceItemHtml = parseInt(input.parentElement.nextElementSibling.textContent);
+    // console.log(priceItemHtml, ' - priceItemHtml in change');
+    let sumItemHtml = input.parentElement.nextElementSibling.nextElementSibling;
+    let sumItemHtmlStart = parseInt(sumItemHtml.textContent);
+    // console.log(sumItemHtml, ' - sumItemHtml in change');
+
+    let sum = priceItemHtml * parseInt(input.value);
+    sumItemHtml.innerHTML = sum;
+    let sumAllStart = parseInt(sumAll.textContent);
+    let sumAllEnd = sumAllStart - sumItemHtmlStart + sum;
+    console.log(sumAllEnd, " - sumAllEnd");
+    sumAll.innerHTML = sumAllEnd;
+  }
+})
+
+

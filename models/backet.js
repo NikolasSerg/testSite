@@ -64,7 +64,14 @@ console.log(data, ' - data'.error); //object
     let data = await this.getAll();
     console.log(typeof data, ' - typeof data');
     return data.filter(item => item.id === id);
-}
+},
+
+  del: async function(id) {
+    let data = await this.getAll();
+    let newData = data.filter( item => item.id === data.id);
+    console.log(newData, '- new Data');
+    return newData;
+  }
 }
   
 module.exports = backet;
