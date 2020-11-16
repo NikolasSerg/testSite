@@ -27,23 +27,15 @@
         <td class="backet_sum">{{sum}}  </td>
         <td>
             <a class="btn-floating btn-smal waves-effect waves-light red">
-                <i class="material-icons backet_close">close</i>
+                <i class="material-icons backet_close" id="{{id}}">close</i>
             </a>
         </td>
     </tr>
-<tr></tr>
-
-
-
-
-
-
 {{/each}}
-</table>
-
+    </table>
     <h3 id="backet_sumAll">{{sumAll}}</h3>
 {{else}}
-    <p>nope</p>
+    <p>КОРЗИНА ПУСТА</p>
 {{/if}}
 </div>
 

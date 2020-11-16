@@ -3,6 +3,7 @@
 // let remove;
 // let sum;
 let sumAll;
+let table;
 
 window.onload = function() {
   console.log('сторніка загрузилась');
@@ -10,6 +11,9 @@ window.onload = function() {
   // let add = document.querySelector('#backet .backet_add');
   // let remove = document.querySelector('#backet .backet_remove');
   sumAll = document.querySelector('#backet_sumAll');
+  table = document.querySelector('#backet table');
+
+  console.log(table, ' - table');
 
   // console.log(sum);
   // // console.log(count, ' - count');
@@ -124,9 +128,36 @@ backet.addEventListener('click', (event)  => {
       }
       sumItemHtml.innerHTML = sumItem;
     }
-    else if(event.target.classList.contains('backet_counter')){
+    else if(event.target.classList.contains('backet_close')){
       let close = event.target;
-      let parent = close.parentElement;
+      let id = close.attributes.id.value;
+      let sumItemHtml = parseInt(close.parentElement.parentElement.previousElementSibling.textContent);
+      let sum = parseInt(sumAll.textContent) - sumItemHtml;
+      // console.log(sumItemHtml, ' - sumItemHtml');
+      // console.log(id, '- id');
+      // console.log(close, ' - close');
+      let trItem = document.getElementById(id);
+      // let parent = document.querySelector(`table #${id}`);
+      // console.log(document.getElementById(id));
+      // console.log(document.getElementById(id).parentNode);
+      let table = document.querySelector('#backet table');
+      // console.log(parent, ' - parent');
+     
+      if(sum === 0) {
+        table.parentNode.removeChild(table);
+        sumAll.parentNode.removeChild(sumAll);
+
+        let paragraf = document.createElement('p');
+        paragraf.innerHTML = "КОРЗИНА ПУСТА";
+        let backet = document.getElementById('backet');
+        console.log(backet, ' - backet');
+        backet.appendChild(paragraf);
+
+      } else {
+        trItem.parentNode.removeChild(trItem);
+        sumAll.innerHTML = sum;
+      }
+     
     }
     else {
       console.log('none');
@@ -134,19 +165,26 @@ backet.addEventListener('click', (event)  => {
 });
 
 
-// let event = new Event("")
+
 
 backet.addEventListener('input', (event) => {
   if(event.currentTarget.classList.contains = 'backet_counter') {
     // console.log('input change');
     let input = event.target;
+   
     let priceItemHtml = parseInt(input.parentElement.nextElementSibling.textContent);
     // console.log(priceItemHtml, ' - priceItemHtml in change');
     let sumItemHtml = input.parentElement.nextElementSibling.nextElementSibling;
     let sumItemHtmlStart = parseInt(sumItemHtml.textContent);
     // console.log(sumItemHtml, ' - sumItemHtml in change');
-
-    let sum = priceItemHtml * parseInt(input.value);
+    let sum;
+    if(input.value === "" || input.value === "0"){
+      input.value = 1;
+      sum = priceItemHtml;
+    } else {
+      sum = priceItemHtml * parseInt(input.value);
+    }
+    
     sumItemHtml.innerHTML = sum;
     let sumAllStart = parseInt(sumAll.textContent);
     let sumAllEnd = sumAllStart - sumItemHtmlStart + sum;

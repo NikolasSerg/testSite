@@ -48,10 +48,15 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     let data = await backet.getAll();
-    let sumAll = data.reduce((pre, cur) => 
-        pre.sum + cur.sum
-    );
-    
+    console.log(data.length, ' - data.length');
+    let sumAll;
+    if(data.length !== 0) {
+        sumAll = data.reduce((pre, cur) => 
+            pre.sum + cur.sum
+        );
+    } else {
+        sumAll = 0;
+    }
     console.log(sumAll, ' - sumAll'.red.bgBlue);
     // console.log(typeof data, ' - typeof data');
     // console.log(data.length, ' - data.length');
