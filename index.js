@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 const routersHome = require('./routes/home');
 const routersAbout = require('./routes/about');
@@ -38,4 +39,18 @@ app.use('/backet', routersBacket);
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => console.log(`server working at the port ${PORT}`));
+async function start() {
+    const url = 'mongodb+srv://mongoSergiu:mongoSergiu@cluster0.buhaq.azure.mongodb.net/<dbname>?retryWrites=true&w=majority'
+    try {
+        await mongoose.connect(url, {useNewUrlParser})    
+        app.listen(PORT, () => console.log(`server working at the port ${PORT}`));
+    } catch (error) {
+        console.log(error);
+    }
+}
+start();
+
+
+
+
+
