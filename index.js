@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 const routersHome = require('./routes/home');
@@ -23,10 +24,10 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended:false}))
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 app.use('/', routersHome);
 app.use('/about', routersAbout);
@@ -40,12 +41,19 @@ app.use('/backet', routersBacket);
 const PORT = process.env.PORT || 3000;
 
 async function start() {
-    const url = 'mongodb+srv://mongoSergiu:mongoSergiu@cluster0.buhaq.azure.mongodb.net/<dbname>?retryWrites=true&w=majority'
+    
+    // mongodb+srv://mongoSergiu:<password>@cluster0.buhaq.azure.mongodb.net/<dbname>?retryWrites=true&w=majority
     try {
-        await mongoose.connect(url, {useNewUrlParser})    
+        const url = 'mongodb+srv://mongoSergiu:mongoSergiu@cluster0.buhaq.azure.mongodb.net/test' 
+        await mongoose.connect(url, {
+            useNewUrlParser: true
+            ,useUnifiedTopology: true
+        })    
         app.listen(PORT, () => console.log(`server working at the port ${PORT}`));
     } catch (error) {
+        console.log(' ----------------- error conection start');
         console.log(error);
+        console.log(' ----------------- error conection end');
     }
 }
 start();

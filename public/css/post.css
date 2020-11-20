@@ -1,10 +1,18 @@
-.card-action div {
+#posts .card-action div {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
 
-form {
-    
+#posts .prices {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: rgb(255, 171, 64);
+}
+
+#posts .card-title {
+    /* color: red; */
+    font-weight: 700;
+    text-shadow: 3px 3px 3px #000;
 }
