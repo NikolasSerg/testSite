@@ -38,6 +38,12 @@
       <li><a href="/about">ПРО НАС</a></li>
       {{/if}}
 
+      {{#if isAuth}}
+        <li class="active"><a href="/auth#login">ВХІД</a></li>
+      {{else}}
+        <li><a href="/auth#login">ВХІД</a></li>
+      {{/if}}
+
       {{#if isBasket}}
       {{!-- <div> --}}
         <li class="active">

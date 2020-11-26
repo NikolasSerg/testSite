@@ -2,43 +2,44 @@
 <a href="http:/">ГОЛОВНА</a>
 
 {{#if product.length}}
-<div id="posts">
-  {{#each product}}
-  <div class="row">
-    <div class="col s6 offset-s3">
-      <div class="card z-depth-3">
-        <div class="card-image">
-          <img src="{{img}}" title="{{title}}">
-          <span class="card-title">{{title}}</span>
-        </div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-            I am convenient because I require little markup to use effectively.</p>
-          <span>ЦІНА</span>
-          <p class="prices browser-default">{{price}}</p>
-        </div>
-        <div class="card-action">
-          <span>Хочеш спробувати створити самому. Жми нижче</span>
-          <br>
-          <div>
-            <a href="/posts/{{id}}" target="_blank">РЕЦЕПТ</a>
-            <a href="/posts/{{id}}/edit?allow=true">РЕДАКТУВАТИ</a>
-            <form action="#">
-              <input type="hidden" name="id" value="{{id}}">
-              <input type="hidden" name="img" value="{{img}}">
-              <input type="hidden" name="title" value="{{title}}">
-              <input type="hidden" name="price" value="{{price}}">
-              <button type="submit" class="btn btn-primary" onclick="fetchToServer(event)">
-                <i class="small material-icons">shopping_cart</i>
-              </button>
-            </form>
+  <id id="posts">  
+    {{#each product}}
+    <div class="row">
+      <div class="col s6 offset-s3">
+        <div class="card z-depth-3">
+          <div class="card-image">
+            <img src="{{img}}" title="{{title}}">
+            <span class="card-title">{{title}}</span>
+          </div>
+          <div class="card-content">
+            <p>I am a very simple card. I am good at containing small bits of information.
+              I am convenient because I require little markup to use effectively.</p>
+            <span>ЦІНА</span>
+            <p class="prices browser-default">{{price}}</p>
+          </div>
+          <div class="card-action">
+            <span>Хочеш спробувати створити самому. Жми нижче</span>
+            <br>
+            <div>
+              <a href="/posts/{{_id}}" target="_blank">РЕЦЕПТ</a>
+              <a href="/posts/{{_id}}/edit?allow=true">РЕДАКТУВАТИ</a>
+              <form action="#">
+                <input type="hidden" name="id" value="{{id}}">
+                <input type="hidden" name="img" value="{{img}}">
+                <input type="hidden" name="title" value="{{title}}">
+                <input type="hidden" name="price" value="{{price}}">
+                <button type="submit" class="btn btn-primary" onclick="fetchToServer(event)">
+                  <i class="small material-icons">shopping_cart</i>
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    {{/each}}  
+      <a class="btn-floating btn-large waves-effect waves-light teal darken-1 hiddenBtn"><i class="material-icons">expand_less</i></a>
   </div>
-  {{/each}}  
-</div>
 {{else}}
   <p>ПОСТІВ поки немає</p>
 {{/if}}

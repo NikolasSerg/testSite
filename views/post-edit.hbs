@@ -23,6 +23,11 @@
     <button class="btn btn-primary" type="submit">Додати товар</button>
 </form>
 
+<form action="/posts/remote" method="POST">
+      <input type="hidden" name="id" value="{{product.id}}">
+      <button type="submit" class="btn red lighten-3">УДАЛИТЬ</button>
+</form>
+
 {{!-- 
  <div class="insertDiv">
           <a class="btn-floating btn-large waves-effect waves-light red btn-add"><i class="material-icons">+</i></a>
