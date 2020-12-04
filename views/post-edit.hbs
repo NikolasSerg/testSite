@@ -20,7 +20,12 @@
 
     <input type="hidden" name="id" value="{{product.id}}">
 
-    <button class="btn btn-primary" type="submit">Додати товар</button>
+    <button class="btn btn-primary" type="submit">Редагувати товар</button>
+</form>
+
+<form action="/posts/remove" method="POST">
+      <input type="hidden" name="id" value="{{product.id}}">
+      <button class="btn red">Видалити товар</button>
 </form>
 
 {{!-- 

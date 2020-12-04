@@ -4,7 +4,7 @@ const Product = require('../models/product');
 const router = Router();
 
 router.get('/', async(req, res) => {
-    let product = await Product.getAll();
+    let product = await Product.find();
     res.status(200);
     res.render('posts', {
         title: 'posts',
@@ -16,7 +16,7 @@ router.get('/', async(req, res) => {
 
 router.get('/:id', async(req, res) => {
     console.log(req.params.id, ' - req.params.id');
-    let product = await Product.getId(req.params.id);
+    let product = await Product.findById(req.params.id);
     console.log(product, ' - product');
     res.render('post', {
         title: product.title,
@@ -28,19 +28,23 @@ router.get('/:id/edit', async (req, res) => {
     if(!req.query.allow) {
         return res.redirect("/");
     }
-    let product = await Product.getId(req.params.id);
+    let product = await Product.findById(req.params.id);
     res.render('post-edit', {product});
 })
 
 router.post('/edit', async (req, res) => {
    console.log(req.body, ' -  req.body');
-    await Product.update(req.body);
+    await Product.updateOne({_id: req.body.id});
     res.redirect("/posts");
+})
 
-  
-//    let indexData = data.findIndex();
-//    console.log(indexData, ' - indexData');
-//    console.log(data[indexData], ' - data[indexData]');
+router.post('/remove', async (req, res) => {
+    try {
+        await Product.deleteOne({_id: req.body.id})    
+    } catch (error) {
+        console.log(error);
+    }
+    res.redirect('/posts');
 })
 
 module.exports = router; 
