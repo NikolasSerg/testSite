@@ -39,7 +39,7 @@ function objCompos (event) {
 }
 
 
-async function fetchToServer(event){
+async function cart_pushToServer(event){
   event.preventDefault();
   let obj = await objCompos(event);
 

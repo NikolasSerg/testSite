@@ -1,5 +1,7 @@
 const { Router } = require('express');
 const Product = require('../models/product');
+const user = require('../models/user');
+const User = require('../models/user');
 
 const router = Router();
 
@@ -13,6 +15,14 @@ router.get('/', async(req, res) => {
     });
     console.log('posts is it');
 });
+
+router.post('/add', (req, res) => {
+    const user = req.user;
+    console.log(req.body, ' - req.body in router POST')
+    user.addCart(req.body);
+
+    res.render('backet', req.body)
+})
 
 router.get('/:id', async(req, res) => {
     console.log(req.params.id, ' - req.params.id');

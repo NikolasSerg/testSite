@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
     console.log(req.body, ' -req.body');
-    // const product = new Product(req.body.title, req.body.price, req.body.img);
+    
     const product = new Product({
         title: req.body.title,
         price: req.body.price,
