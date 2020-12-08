@@ -1,7 +1,5 @@
 const { Router } = require('express');
 const Product = require('../models/product');
-const user = require('../models/user');
-const User = require('../models/user');
 
 const router = Router();
 
@@ -16,12 +14,12 @@ router.get('/', async(req, res) => {
     console.log('posts is it');
 });
 
-router.post('/add', (req, res) => {
-    const user = req.user;
-    console.log(req.body, ' - req.body in router POST')
-    user.addCart(req.body);
+router.post('/add', async(req, res) => {
+    const product = await Product.findById(req.body.id);
+    console.log(product, ' - producnt in router POST')
+    await req.user.addCart(product);
 
-    res.render('backet', req.body)
+    res.render('backet', product)
 })
 
 router.get('/:id', async(req, res) => {
@@ -34,27 +32,27 @@ router.get('/:id', async(req, res) => {
     });
 })
 
-router.get('/:id/edit', async (req, res) => {
-    if(!req.query.allow) {
+router.get('/:id/edit', async(req, res) => {
+    if (!req.query.allow) {
         return res.redirect("/");
     }
     let product = await Product.findById(req.params.id);
-    res.render('post-edit', {product});
+    res.render('post-edit', { product });
 })
 
-router.post('/edit', async (req, res) => {
-   console.log(req.body, ' -  req.body');
-    await Product.updateOne({_id: req.body.id});
+router.post('/edit', async(req, res) => {
+    console.log(req.body, ' -  req.body');
+    await Product.updateOne({ _id: req.body.id });
     res.redirect("/posts");
 })
 
-router.post('/remove', async (req, res) => {
+router.post('/remove', async(req, res) => {
     try {
-        await Product.deleteOne({_id: req.body.id})    
+        await Product.deleteOne({ _id: req.body.id })
     } catch (error) {
         console.log(error);
     }
     res.redirect('/posts');
 })
 
-module.exports = router; 
+module.exports = router;

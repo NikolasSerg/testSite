@@ -1,4 +1,4 @@
-const {Schema, model, models} = require('mongoose');
+const { Schema, model, models } = require('mongoose');
 
 const userSchema = new Schema({
     name: {
@@ -8,10 +8,9 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true
-    }, 
+    },
     cart: {
-        items: [
-            {
+        items: [{
                 count: {
                     type: Number,
                     required: true,
@@ -23,26 +22,26 @@ const userSchema = new Schema({
                     required: true
                 }
             }
-            
+
         ]
     }
 });
 
 
-userSchema.method.addCart = function(product) {
+userSchema.methods.addCart = function(product) {
     const items = [...this.cart.items];
     const idx = items.findIndex(c => {
         return c.productId.toString() === product._id.toString()
     })
-    if(idx >= 0) {  
-        items[idx].count = item[idx].count + 1; 
+    if (idx >= 0) {
+        items[idx].count = items[idx].count + 1;
     } else {
         items.push({
             count: 1,
             productId: product._id
         })
     }
-    this.cart = {items}
+    this.cart = { items }
     return this.save()
 }
 
