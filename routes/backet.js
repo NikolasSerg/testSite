@@ -47,20 +47,34 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-    let data = await backet.getAll();
-    console.log(data.length, ' - data.length');
-    let sumAll;
-    if(data.length !== 0) {
-        sumAll = data.reduce((pre, cur) => 
-            pre.sum + cur.sum
-        );
-    } else {
-        sumAll = 0;
-    }
-    console.log(sumAll, ' - sumAll'.red.bgBlue);
-    // console.log(typeof data, ' - typeof data');
+    const user = await req.user
+    .populate('cart.items.productId')
+    .execPopulate();
+
+    console.log(user , ' - user in backet');
+    console.log(user.cart.items , ' - user.cart.items in backet');
+
+    const data = user.item.productId
+
+    const sumAll = 0
+    const mapData = data.map((i) => {
+        
+    })
+
+    // let data = await backet.getAll();
     // console.log(data.length, ' - data.length');
-    console.log(data, ' - backet'.red.bgBlue);
+    // let sumAll;
+    // if(data.length !== 0) {
+    //     sumAll = data.reduce((pre, cur) => 
+    //         pre.sum + cur.sum
+    //     );
+    // } else {
+    //     sumAll = 0;
+    // }
+    // console.log(sumAll, ' - sumAll'.red.bgBlue);
+    // // console.log(typeof data, ' - typeof data');
+    // // console.log(data.length, ' - data.length');
+    // console.log(data, ' - backet'.red.bgBlue);
     res.render('backet', {
         data,
         sumAll

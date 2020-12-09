@@ -5,6 +5,7 @@ const router = Router();
 
 router.get('/', async(req, res) => {
     let product = await Product.find();
+    console.log(product, ' - product in post');
     res.status(200);
     res.render('posts', {
         title: 'posts',
