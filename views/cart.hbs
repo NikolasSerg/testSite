@@ -1,0 +1,94 @@
+<h1>cart</h1>
+
+<div id="cart">
+
+{{#if data.length}}
+    {{!-- <form action="#">
+        {{#each data}}
+            <div class="prodItem">
+                <div class="cart_img">
+                    <img src="{{img}}" alt="{{title}}">
+                </div>
+                <div class="cart_title">
+                    <span>{{title}}</span>
+                </div>
+                <div class="cart_calc">
+                    <a class="btn-floating btn-smal waves-effect waves-light red">
+                        <i class="material-icons cart_remove">remove</i>
+                    </a>
+                    <input type="text" class="browser-default cart_counter" value="{{count}}">
+                    <a class="btn-floating btn-smal waves-effect waves-light red">
+                        <i class="material-icons cart_add">add</i>
+                    </a>
+                </div>
+                <div class="cart_price">
+                    <span>{{price}}</span>
+                </div>
+                <div class="cart_sum">
+                    <span>{{sum}}</span>
+                </div>
+                <div class="cart_remove">
+                    <a class="btn-floating btn-smal waves-effect waves-light red">
+                        <i class="material-icons cart_close" id="{{id}}">close</i>
+                    </a>
+                </div>
+            </div>
+        {{/each}}
+    </form>
+    <h3 id="cart_sumAll">{{sumAll}}</h3>
+
+    <button class="cart_order waves-effect waves-light btn">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+
+    <p>КОРЗИНА ПУСТА</p>
+{{/if}}
+
+</div> --}}
+
+
+
+
+
+
+<table>
+    <tr>
+        <th colspan="2">ТОВАР</th>
+        <th>К-ТЬ</th>
+        <th>ЦІНА</th>
+        <th  colspan="2">СУМА</th>
+    </tr>
+{{#each data}}
+    <tr id="{{_id}}" class="tr$">
+        <td><img src="{{img}}" alt="{{title}}"></td>
+        <td>{{title}}</td>
+        <td>
+            <a class="btn-floating btn-smal waves-effect waves-light red">
+                <i class="material-icons cart_minus"  id="{{_id}}">remove</i>
+            </a>
+            <input type="text" class="browser-default cart_counter" value="{{count}}">
+            <a class="btn-floating btn-smal waves-effect waves-light red">
+                <i class="material-icons cart_add" id="{{_id}}">add</i>
+            </a> 
+        </td>
+        <td class="cart_price">{{price}}</td>
+        <td class="cart_sum">{{getCost price count}}  </td>
+        <td>
+            <a class="btn-floating btn-smal waves-effect waves-light red">
+                <i class="material-icons cart_close" id="{{id}}">close</i>
+            </a>
+        </td>
+    </tr>
+{{/each}}
+    </table>
+    <h3 id="cart_sumAll">{{sumAll}}</h3>
+
+    <button class="cart_order waves-effect waves-light btn">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+{{else}}
+    <p>КОРЗИНА ПУСТА</p>
+{{/if}}
+</div>
+
+<script>
+    Handlebars.registerHelper('getCost', function (price, count) {
+    return price * count
+})
+</script>

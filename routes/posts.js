@@ -20,7 +20,7 @@ router.post('/add', async(req, res) => {
     console.log(product, ' - producnt in router POST')
     await req.user.addCart(product);
 
-    res.render('backet', product)
+    res.redirect('/posts')
 })
 
 router.get('/:id', async(req, res) => {

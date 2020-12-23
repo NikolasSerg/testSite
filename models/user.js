@@ -16,6 +16,10 @@ const userSchema = new Schema({
                     required: true,
                     default: 1
                 },
+                // sumAll: {
+                //     type: Number,
+                //     required: true
+                // },
                 productId: {
                     type: Schema.Types.ObjectId,
                     ref: 'Product',
@@ -35,6 +39,8 @@ userSchema.methods.addCart = function(product) {
     })
     if (idx >= 0) {
         items[idx].count = items[idx].count + 1;
+        // console.log(items[idx], ' - items[idx]');
+        // items[idx].sumAll = items[idx].sumAll + items[idx].price;
     } else {
         items.push({
             count: 1,
@@ -43,6 +49,35 @@ userSchema.methods.addCart = function(product) {
     }
     this.cart = { items }
     return this.save()
-}
+};
+
+userSchema.methods.minusItemCart = function(product) {
+    const items = [...this.cart.items];
+    const idx = items.findIndex(c => {
+        return c.productId.toString() === product.id.toString()
+    })
+    if(idx >= 0) {
+        items[idx].count = items[idx].count - 1;
+        console.log(items[idx].count, '- items.count');
+    }
+    this.cart = { items };
+    console.log('MINUS USER');
+    return this.save()
+};
+
+userSchema.methods.addItemCart = async function(product) {
+    const items = [...this.cart.items];
+    const idx = await items.findIndex(c => {
+        return c.productId.toString() === product.id.toString()
+    })
+    if(idx >= 0) {
+        items[idx].count = items[idx].count + 1;
+        console.log(items[idx].count, '- items.count');
+    }
+    this.cart = { items };
+    console.log('ADD USER');
+    return this.save()
+};
+
 
 module.exports = model('User', userSchema);

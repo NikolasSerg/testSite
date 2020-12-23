@@ -1,26 +1,28 @@
-// let count;
-// let add;
-// let remove;
-// let sum;
 let sumAll;
 let table;
+let evenItem;
 
 window.onload = function() {
-  console.log('сторніка загрузилась');
-  // let count = document.querySelector('#backet .backet_counter');
-  // let add = document.querySelector('#backet .backet_add');
-  // let remove = document.querySelector('#backet .backet_remove');
-  sumAll = document.querySelector('#backet_sumAll');
-  table = document.querySelector('#backet table');
-
-  console.log(table, ' - table');
-
-  // console.log(sum);
-  // // console.log(count, ' - count');
-  // // console.log(count.value, ' - count.value');
-  // console.log(add);
-  // console.log(remove);
+  sumAll = document.querySelector('#cart_sumAll');
+  table = document.querySelector('#cart table');
+  calcSum();
 }
+
+function calcSum () {
+  let items = document.querySelectorAll('.cart_counter');
+  console.log(items, ' - items');
+  console.log(items.length, ' - length');
+  for(let i = 0; i < items.length; i++){
+      let price = Number(items[i].parentElement.nextElementSibling.textContent);
+      console.log(price, ' - price');
+      let value = Number(items[i].value);
+      console.log(value, ' - value');
+      let sum = price * value;
+      console.log(sum, ' - sum');
+  }
+}
+
+
 
 function objCompos (event) {
     console.log(event.currentTarget.form[0]);
@@ -43,7 +45,7 @@ async function cart_pushToServer(event){
   event.preventDefault();
   let obj = await objCompos(event);
 
-  postData('/backet', obj).
+  postData('/cart', obj).
   then((data) => {
     console.log(data, ' - responce server');
   })
@@ -63,84 +65,125 @@ async function postData(url, data) {
   })
   return await responce.json();
 }
+async function putData(url, data) {
+  // console.log(data, '  - data');
+  console.log('вызов ФЕТЧ');
+  const responce = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: JSON.stringify(data)
+  })
+  return await responce.json();
+}
 
 // опрацювання подій в корзині
 
-let backet = document.querySelector('#backet');
-backet.addEventListener('click', (event)  => {
+let cart = document.querySelector('#cart');
+cart.addEventListener('click', (event)  => {
     // додавання одиниць товару
-    if(event.target.classList.contains('backet_add')) {
+    //TODO ADD item
+    if(event.target.classList.contains('cart_add')) {
       let add_button =  event.target;
       // console.log(add_button, ' - add_button');
       let input = add_button.parentElement.previousElementSibling;
       // console.log(input, ' - input');
 
-      // console.log('its class add');
+      console.log('its class add');
       // console.log(event.target, ' - event.target');
+      evenItem = event.target;
       // console.log(event.target.attributes.name.value, ' - event.attributes.name.value');
       // console.log(input.value, ' - input value');
+
       input.value = +input.value + 1;
+      console.log(event.target.id, ' - event.target.id');
+      let id = event.target.id;
+      // let sum = document.querySelector(toString("[id="+`${id}`+"] .cart_add"));
+      console.log(sum, ' - sum');
+      // console.log(add_button.parentElement.parentElement.parentElement, ' - did');
+      // console.log(add_button.parentElement.parentElement.parentElement.getAttribute('id'), ' - did');
+      let data = {
+        id: add_button.parentElement.parentElement.parentElement.getAttribute('id'),
+        // count: +input.value,
+        type: 'add'
+      }
+      postData('/cart', data);
       
-      let priceItemHtml = parseInt(add_button.parentElement.parentElement.nextElementSibling.textContent);
+      // let priceItemHtml = parseInt(add_button.parentElement.parentElement.nextElementSibling.textContent);
       // console.log(priceItemHtml, ' - priceItemHtml');
       // console.log(priceItemHtml.textContent, ' - priceItemHtml textContent');
-      let sumItemHtml = add_button.parentElement.parentElement.nextElementSibling.nextElementSibling;
+      // let sumItemHtml = add_button.parentElement.parentElement.nextElementSibling.nextElementSibling;
       // console.log(sumItemHtml.textContent,' - sumItemHtml text conent');
-      let sumItem = parseInt(input.value) * priceItemHtml;
+      // let sumItem = parseInt(input.value) * priceItemHtml;
       // let sumItem = +sumItemHtml.textContent + +priceItemHtml.textContent;
       // let sumItem = parseInt(sumItemHtml.textContent) + parseInt(priceItemHtml.textContent);
       // console.log(+sumItemHtml.textContent + +priceItemHtml.textContent, ' - test');
       // console.log(sumItem, ' - sumItem');
-      sumItemHtml.innerHTML = sumItem;
+      // sumItemHtml.innerHTML = sumItem;
 
-      let sum = parseInt(sumAll.textContent);
+      // let sum = parseInt(sumAll.textContent);
       // console.log(sum, ' - sum');
-      sumAll.innerHTML = sum + priceItemHtml;
+      // sumAll.innerHTML = sum + priceItemHtml;
 
     }
     // віднімання товару
-    else if(event.target.classList.contains('backet_remove')) {
-      // console.log('its class remove');
+    //TODO REMOVE item
+    else if(event.target.classList.contains('cart_minus')) {
+      console.log('its class remove');
       let remove_button =  event.target;
       let input = remove_button.parentElement.nextElementSibling;
+      input.value = +input.value -1;
+      // let count = +input.value;
+      let data = {
+        id: remove_button.parentElement.parentElement.parentElement.getAttribute('id'),
+        // count: +remove_button.parentElement.nextElementSibling.value,
+        type: 'minus'
+      }
+      console.log(data, ' - data');
+      
+      postData('/cart', data)
       // console.log(input, ' - input in remove');
       // console.log(+input.value, ' - input.value in remove');
 
-      let rez = parseInt(input.value) - 1;
-      console.log(rez, ' - rez');
+      // let rez = parseInt(input.value) - 1;
+      // console.log(rez, ' - rez');
 
-      let priceItem = parseInt(remove_button.parentElement.parentElement.nextElementSibling.textContent);
-      let sumItemHtml = remove_button.parentElement.parentElement.nextElementSibling.nextElementSibling;
-      let sumItem;  
-       
+      // let priceItem = parseInt(remove_button.parentElement.parentElement.nextElementSibling.textContent);
+      // let sumItemHtml = remove_button.parentElement.parentElement.nextElementSibling.nextElementSibling;
+      // let sumItem;  
+      // console.log(remove_button.parentElement.parentElement.parentElement, ' - did');
+      // console.log(remove_button.parentElement.parentElement.parentElement.getAttribute('id'), ' - did');
       // console.log(sumItem, " - sumItem");
     
 
-      let sum = parseInt(sumAll.textContent);
+      // let sum = parseInt(sumAll.textContent);
 
-      if(rez < 1) {
-        input.value = 1;
-        sumItem = priceItem;
-      } else {
-        input.value = rez;
-        sumItem = parseInt(input.value) * priceItem;
-        sumAll.innerHTML = sum - priceItem;
-      }
-      sumItemHtml.innerHTML = sumItem;
+      // if(rez < 1) {
+      //   input.value = 1;
+      //   sumItem = priceItem;
+      // } else {
+      //   input.value = rez;
+      //   sumItem = parseInt(input.value) * priceItem;
+      //   sumAll.innerHTML = sum - priceItem;
+      // }
+      // sumItemHtml.innerHTML = sumItem;
     }
-    else if(event.target.classList.contains('backet_close')){
+    //TODO CLOSE item
+    else if(event.target.classList.contains('cart_close')){
       let close = event.target;
       let id = close.attributes.id.value;
       let sumItemHtml = parseInt(close.parentElement.parentElement.previousElementSibling.textContent);
       let sum = parseInt(sumAll.textContent) - sumItemHtml;
       // console.log(sumItemHtml, ' - sumItemHtml');
       // console.log(id, '- id');
-      // console.log(close, ' - close');
+      // c+onsole.log(close, ' - close');
       let trItem = document.getElementById(id);
       // let parent = document.querySelector(`table #${id}`);
       // console.log(document.getElementById(id));
       // console.log(document.getElementById(id).parentNode);
-      let table = document.querySelector('#backet table');
+      let table = document.querySelector('#cart table');
       // console.log(parent, ' - parent');
      
       if(sum === 0) {
@@ -149,9 +192,9 @@ backet.addEventListener('click', (event)  => {
 
         let paragraf = document.createElement('p');
         paragraf.innerHTML = "КОРЗИНА ПУСТА";
-        let backet = document.getElementById('backet');
-        console.log(backet, ' - backet');
-        backet.appendChild(paragraf);
+        let cart = document.getElementById('cart');
+        console.log(cart, ' - cart');
+        cart.appendChild(paragraf);
 
       } else {
         trItem.parentNode.removeChild(trItem);
@@ -166,9 +209,9 @@ backet.addEventListener('click', (event)  => {
 
 
 
-
-backet.addEventListener('input', (event) => {
-  if(event.currentTarget.classList.contains = 'backet_counter') {
+//TODO  iNPUT item
+cart.addEventListener('input', (event) => {
+  if(event.currentTarget.classList.contains = 'cart_counter') {
     // console.log('input change');
     let input = event.target;
    

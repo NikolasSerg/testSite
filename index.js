@@ -10,7 +10,7 @@ const routersGallery = require('./routes/gallery');
 const routersPrices = require('./routes/prices');
 const routersAdd = require('./routes/add');
 const routersPosts = require('./routes/posts');
-const routersBacket = require('./routes/backet');
+const routersCart = require('./routes/cart');
 
 const bodyParser = require("body-parser");
 
@@ -24,8 +24,13 @@ const hbs = exphbs.create({
         allowProtoPropertiesByDefault: true,
         allowProtoMethodsByDefault: true
     }
+    ,
+    helpers: {
+        getCost: function (price, count) {
+            return price * count    ;
+        }
+    }
 })
-
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
@@ -54,7 +59,7 @@ app.use('/gallery', routersGallery);
 app.use('/prices', routersPrices);
 app.use('/add', routersAdd);
 app.use('/posts', routersPosts);
-app.use('/backet', routersBacket);
+app.use('/cart', routersCart);
 
 
 
